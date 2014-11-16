@@ -6,10 +6,6 @@
 
 package classdb;
 
-/**
- *
- * @author Thomas
- */
 public class Users {
     
 }
