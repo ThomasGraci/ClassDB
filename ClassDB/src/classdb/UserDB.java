@@ -62,79 +62,8 @@ public class UserDB extends User implements CRUD{
 
     public void read() throws Exception {
 
-        /*String req = "{?=call readcli(?)}";
-
-        CallableStatement cstmt = null;
-        try {
-            cstmt = dbConnect.prepareCall(req);
-            cstmt.registerOutParameter(1, oracle.jdbc.OracleTypes.CURSOR);
-            cstmt.setString(2, nom);
-            cstmt.executeQuery();
-            ResultSet rs = (ResultSet) cstmt.getObject(1);
-            if (rs.next()) {
-                this.iduser = rs.getInt("ID_USER");
-                this.prenom = rs.getString("PRENOM");
-                this.cp = rs.getString("CP");
-                this.localite = rs.getString("LOCALITE");
-                this.rue = rs.getString("RUE");
-                this.num = rs.getString("NUM");
-                this.tel = rs.getString("TEL");
-
-            } else {
-                throw new Exception("Code inconnu");
-            }
-
-        } catch (Exception e) {
-
-            throw new Exception("Erreur de lecture " + e.getMessage());
-        } finally {//effectué dans tous les cas 
-            try {
-                cstmt.close();
-            } catch (Exception e) {
-            }
-        }*/
+        
     }
-
-   /* public static ArrayList<ClientDB> rechNom(String nomrech) throws Exception {
-        ArrayList<ClientDB> plusieurs = new ArrayList<ClientDB>();
-        String req = "{?=call readclinom(?)}";
-
-        CallableStatement cstmt = null;
-        try {
-            cstmt = dbConnect.prepareCall(req);
-            cstmt.registerOutParameter(1, oracle.jdbc.OracleTypes.CURSOR);
-            cstmt.setString(2, nomrech);
-            cstmt.executeQuery();
-            ResultSet rs = (ResultSet) cstmt.getObject(1);
-            boolean trouve = false;
-            while (rs.next()) {
-                trouve = true;
-                int idclient = rs.getInt("IDCLIENT");
-                String nom = rs.getString("NOM");
-                String prenom = rs.getString("PRENOM");
-                String cp = rs.getString("CP");
-                String localite = rs.getString("LOCALITE");
-                String rue = rs.getString("RUE");
-                String num = rs.getString("NUM");
-                String tel = rs.getString("TEL");
-                plusieurs.add(new ClientDB(idclient, nom, prenom, cp, localite, rue, num, tel));
-            }
-
-            if (!trouve) {
-                throw new Exception("nom inconnu");
-            } else {
-                return plusieurs;
-            }
-        } catch (Exception e) {
-
-            throw new Exception("Erreur de lecture " + e.getMessage());
-        } finally {//effectué dans tous les cas 
-            try {
-                cstmt.close();
-            } catch (Exception e) {
-            }
-        }
-    }*/
 
     public void update() throws Exception {
         CallableStatement cstmt = null;
