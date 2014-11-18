@@ -60,10 +60,38 @@ public class UserDB extends User implements CRUD{
         }
     }
 
-    public void read(int nuser) throws Exception {
-
-        
-    }
+    public void read(int nuser)throws Exception{
+       
+        CallableStatement cstmt=null;
+        try{
+            boolean trouve=false;
+             String query1="SELECT * FROM users WHERE id_user = ?";
+             PreparedStatement pstm1 = dbConnect.prepareStatement(query1);
+             pstm1.setInt(1,nuser);
+             ResultSet rs= pstm1.executeQuery();
+             if(rs.next()){
+                 trouve = true;
+                 iduser = rs.getInt("ID_USER");
+                 nom = rs.getString("NOM");
+                 prenom = rs.getString("PRENOM");
+                 login = rs.getString("LOGIN");
+                 motdepasse = rs.getString("MOT_DE_PASSE");
+                 admin = rs.getInt("ADMIN");
+                 
+             }
+             if(!trouve)throw new Exception("ID_TACHE inconnu dans la table !");
+        }
+	catch(Exception e){
+             
+                throw new Exception("Erreur de lecture "+e.getMessage());
+             }
+        finally{//effectué dans tous les cas 
+            try{
+              cstmt.close();
+            }
+            catch (Exception e){}
+        }
+     }
 
     public void update() throws Exception {
         CallableStatement cstmt = null;
