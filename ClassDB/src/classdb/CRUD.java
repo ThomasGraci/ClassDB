@@ -6,7 +6,7 @@ public interface CRUD {
 
     public void create() throws Exception;
 
-    public void read() throws Exception;
+    public void read(int n) throws Exception;
 
     public void update() throws Exception;
 

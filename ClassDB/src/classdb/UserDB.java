@@ -60,7 +60,7 @@ public class UserDB extends User implements CRUD{
         }
     }
 
-    public void read() throws Exception {
+    public void read(int nuser) throws Exception {
 
         
     }
