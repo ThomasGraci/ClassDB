@@ -63,10 +63,39 @@ public class TacheDB extends Tache implements CRUD{
         }
     }
 
-    public void read() throws Exception {
-
-        
-    }
+    public void read(int ntache)throws Exception{
+       
+        CallableStatement cstmt=null;
+        try{
+            boolean trouve=false;
+             String query1="SELECT * FROM tache WHERE id_tache = ?";
+             PreparedStatement pstm1 = dbConnect.prepareStatement(query1);
+             pstm1.setInt(1,ntache);
+             ResultSet rs= pstm1.executeQuery();
+             if(rs.next()){
+                 trouve = true;
+                 idtache = rs.getInt("ID_TACHE");
+                 titre = rs.getString("TITRE");
+                 description = rs.getString("DESCRIPTION");
+                 etat = rs.getString("ETAT");
+                 date_tache = rs.getDate("DATE_TACHE");
+                 num_ordre = rs.getInt("NUM_ORDRE");
+                 depanneur = rs.getInt("DEPANNEUR");
+                 createur = rs.getInt("CREATEUR");
+             }
+             if(!trouve)throw new Exception("ID_TACHE inconnu dans la table !");
+        }
+	catch(Exception e){
+             
+                throw new Exception("Erreur de lecture "+e.getMessage());
+             }
+        finally{//effectué dans tous les cas 
+            try{
+              cstmt.close();
+            }
+            catch (Exception e){}
+        }
+     }
 
     public void update() throws Exception {
         CallableStatement cstmt = null;
