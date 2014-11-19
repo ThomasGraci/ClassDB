@@ -18,17 +18,17 @@ public class UserDB extends User implements CRUD{
         super(nom, prenom, login, motdepasse, admin);
     }
 
-    public UserDB(int idclient, String nom, String prenom, String login,
+    public UserDB(int iduser, String nom, String prenom, String login,
             String motdepasse, int admin) {
-        super(idclient, nom, prenom, login, motdepasse, admin);
+        super(iduser, nom, prenom, login, motdepasse, admin);
     }
 
     public UserDB(String nom) {
         this.nom = nom;
     }
 
-    public UserDB(int idclient) {
-        super(idclient, "", "", "", "", 0);
+    public UserDB(int iduser) {
+        super(iduser, "", "", "", "", 0);
     }
 
     public static void setConnection(Connection nouvdbConnect) {
@@ -48,8 +48,17 @@ public class UserDB extends User implements CRUD{
             cstmt.setInt(5, admin);
             cstmt.executeUpdate();
             
-            String query1="SELECT id_user FROM users WHERE nom = ?";
-            PreparedStatement pstm1 = dbConnect.prepareStatement(query1);
+            
+            String query2="select id_user from users where login= ?" ;
+            
+            PreparedStatement pstm2 = dbConnect.prepareStatement(query2);
+            pstm2.setString(1,login);
+            ResultSet rs= pstm2.executeQuery();
+            if(rs.next()){
+                int nc= rs.getInt(1);
+                iduser = nc;
+            }
+            else System.out.println("erreur");
             
         } catch (SQLException e) {
 
@@ -81,7 +90,7 @@ public class UserDB extends User implements CRUD{
                  admin = rs.getInt("ADMIN");
                  
              }
-             if(!trouve)throw new Exception("ID_TACHE inconnu dans la table !");
+             if(!trouve)throw new Exception("ID_USER inconnu dans la table !");
         }
 	catch(Exception e){
              

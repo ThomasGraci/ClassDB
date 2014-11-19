@@ -21,7 +21,7 @@ public class TestUser {
         }
         
         UserDB.setConnection(con);
-        UserDB c1=null,c2=null; 
+        UserDB c1=null,c2=null,c3=null; 
         /*
         ==========================================================================================
             Insertion   
@@ -35,10 +35,27 @@ public class TestUser {
             c2.create();
             
             System.out.println("[INSERTION]user 1 = "+c1.toString());
-            System.out.println("[INSERTION]Fin de l'ajout de la tache 1");
+            System.out.println("[INSERTION]Fin de l'ajout de user 1");
         }catch(Exception e){
             System.out.println("[INSERTION]Erreur :: "+e);
-        } 
+        }
+        /*
+        ==========================================================================================
+            Doublon 
+        ==========================================================================================
+        */
+        try{
+            System.out.println("[DOUBLON]Debut de l'ajout du doublon");
+            c3=new UserDB("Michel","Charles","cmichel","maggle",0);
+            c3.create();
+            
+            
+            System.out.println("[DOUBLON]doublon = "+c3.toString());
+            System.out.println("[DOUBLON]Fin de l'ajout");
+        }catch(Exception e){
+            System.out.println("[DOUBLON]Erreur :: "+e);
+        }
+        
         /*
         ==========================================================================================
             Supression 
@@ -68,6 +85,12 @@ public class TestUser {
         }catch(Exception e){
             System.out.println("[UPDATE]Erreur :: "+e);
         }
+        try{
+            c1.delete();
+        
+        }catch(Exception e){
+            System.out.println("[RECHERCHE]Erreur :: "+e);
+        }
         /*
         ==========================================================================================
             Recherche 
@@ -75,13 +98,17 @@ public class TestUser {
         */
         try{ 
             System.out.println("[RECHERCHE]Debut de la recherche");
-            c1.read(1);
+            c1.read(3);
             System.out.println(c1.toString());
             System.out.println("[RECHERCHE]Fin de la recherche");
+            
         }catch(Exception e){
             System.out.println("[RECHERCHE]Erreur :: "+e);
         }
         
+        
+     
+         
         
         /*
         ==========================================================================================
