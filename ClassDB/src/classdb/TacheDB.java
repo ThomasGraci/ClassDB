@@ -39,6 +39,10 @@ public class TacheDB extends Tache implements CRUD{
 
     public void create() throws Exception {
         CallableStatement cstmt = null;
+        
+        DateFormat df_date = new SimpleDateFormat("dd/MM/yyyy");
+        java.util.Date utilDate = df_date.parse(date_tache);
+        java.sql.Date sqlDate = new java.sql.Date(utilDate.getTime());
         try {
             String req = "call create_tache(?,?,?,?,?,?,?)";
             cstmt = dbConnect.prepareCall(req);
@@ -46,7 +50,7 @@ public class TacheDB extends Tache implements CRUD{
             cstmt.setString(1, titre);
             cstmt.setString(2, description);
             cstmt.setString(3, etat);
-            cstmt.setString(4, date_tache);
+            cstmt.setDate(4, sqlDate);
             cstmt.setInt(5, num_ordre);
             cstmt.setInt(6, depanneur);
             cstmt.setInt(7, createur);
@@ -109,8 +113,7 @@ public class TacheDB extends Tache implements CRUD{
      }
 
     public void update() throws Exception {
-        CallableStatement cstmt = null;
-        
+        CallableStatement cstmt = null;        
        
         DateFormat df_date = new SimpleDateFormat("dd/MM/yyyy");
         java.util.Date utilDate = df_date.parse(date_tache);
