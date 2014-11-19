@@ -34,7 +34,7 @@ public class TestUser {
             c2=new UserDB("DiRupo","Elio","Dirupette","alleze",0);
             c2.create();
             
-            System.out.println("[INSERTION]tache 1 = "+c1.toString());
+            System.out.println("[INSERTION]user 1 = "+c1.toString());
             System.out.println("[INSERTION]Fin de l'ajout de la tache 1");
         }catch(Exception e){
             System.out.println("[INSERTION]Erreur :: "+e);
@@ -46,7 +46,7 @@ public class TestUser {
         */
         try{ 
             System.out.println("[SUPRESSION]Debut de la supression de user 2");
-            System.out.println("[SUPRESSION]tache 2 = "+c2.toString());
+            System.out.println("[SUPRESSION]user 2 = "+c2.toString());
             c2.delete();
             System.out.println("[SUPRESSION]Fin de la supression de user 2");
         }catch(Exception e){

@@ -15,7 +15,7 @@ public class UserDB extends User implements CRUD{
 
     public UserDB(String nom, String prenom, String login,
             String motdepasse, int admin) {
-        super(0,nom, prenom, login, motdepasse, admin);
+        super(nom, prenom, login, motdepasse, admin);
     }
 
     public UserDB(int idclient, String nom, String prenom, String login,
@@ -47,7 +47,10 @@ public class UserDB extends User implements CRUD{
             cstmt.setString(4, motdepasse);
             cstmt.setInt(5, admin);
             cstmt.executeUpdate();
-
+            
+            String query1="SELECT id_user FROM users WHERE nom = ?";
+            PreparedStatement pstm1 = dbConnect.prepareStatement(query1);
+            
         } catch (SQLException e) {
 
             throw new Exception("Erreur de création " + e.getMessage());

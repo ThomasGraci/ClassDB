@@ -31,6 +31,15 @@ public class User {
         this.admin = admin;
 
     }
+    
+    public User( String nom, String prenom, String login, String motdepasse, int admin) {
+        this.nom = nom;
+        this.prenom = prenom;
+        this.login = login;
+        this.motdepasse = motdepasse;
+        this.admin = admin;
+
+    }
 
     public int getIduser() {
         return iduser;
