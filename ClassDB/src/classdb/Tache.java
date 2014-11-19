@@ -1,7 +1,7 @@
 
 package classdb;
 
-import java.sql.Date;
+import java.util.Date;
 
 public class Tache {
     
@@ -13,7 +13,7 @@ public class Tache {
 
     protected String etat;
 
-    protected Date date_tache;
+    protected String date_tache;
 
     protected int num_ordre;
 
@@ -29,8 +29,19 @@ public class Tache {
         this.titre = titre;
     }
 
-    public Tache(int idtache, String titre, String description, String etat, Date date_tache, int num_ordre, int depanneur, int createur) {
+    public Tache(int idtache, String titre, String description, String etat, String date_tache, int num_ordre, int depanneur, int createur) {
         this.idtache = idtache;
+        this.titre = titre;
+        this.description = description;
+        this.etat = etat;
+        this.date_tache = date_tache;
+        this.num_ordre = num_ordre;
+        this.depanneur = depanneur;
+        this.createur = createur;
+
+    }
+    
+    public Tache(String titre, String description, String etat, String date_tache, int num_ordre, int depanneur, int createur) {
         this.titre = titre;
         this.description = description;
         this.etat = etat;
@@ -73,11 +84,11 @@ public class Tache {
         this.etat = etat;
     }
 
-    public Date getDate_tache() {
+    public String getDate_tache() {
         return date_tache;
     }
 
-    public void setDate_tache(Date date_tache) {
+    public void setDate_tache(String date_tache) {
         this.date_tache = date_tache;
     }
 

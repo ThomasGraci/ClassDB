@@ -3,9 +3,9 @@ package test;
 
 import classdb.TacheDB;
 import java.sql.Connection;
-import java.util.ArrayList;
+import java.util.*;
 import Connexion.*;
-import java.sql.Date;
+import java.sql.*;
 
 public class TestTache {
     public static void main(String[] args) {
@@ -21,7 +21,7 @@ public class TestTache {
         }
         
         TacheDB.setConnection(con);
-        TacheDB c1=null,c2=null; 
+        TacheDB c1=null,c2=null,c3=null; 
         /*
         ==========================================================================================
             Insertion   
@@ -29,16 +29,33 @@ public class TestTache {
         */
         try{
             System.out.println("[INSERTION]Debut de l'ajout de la c1");
-            c1=new TacheDB("tache1","tache test1","en cours",java.sql.Date.valueOf("19/11/2014"),1,2,1);
+            c1=new TacheDB("tache1","tache test1","en cours","19/11/2014",4,2,3);
             c1.create();
-            c2=new TacheDB("tache2","tache test2","en cours",java.sql.Date.valueOf("20/11/2014"),2,1,3);
+            c2=new TacheDB("tache2","tache test2","en cours","20/11/2014",6,2,3);
             c2.create();
             
             System.out.println("[INSERTION]tache 1 = "+c1.toString());
             System.out.println("[INSERTION]Fin de l'ajout de la tache 1");
         }catch(Exception e){
             System.out.println("[INSERTION]Erreur :: "+e);
-        } 
+        }
+        
+        /*
+        ==========================================================================================
+            Doublon 
+        ==========================================================================================
+        */
+        try{
+            System.out.println("[DOUBLON]Debut de l'ajout du doublon");
+            c3=new TacheDB("tache1","tache test1","en cours","19/11/2014",4,2,3);
+            c3.create();
+            
+            
+            System.out.println("[DOUBLON]doublon = "+c3.toString());
+            System.out.println("[DOUBLON]Fin de l'ajout");
+        }catch(Exception e){
+            System.out.println("[DOUBLON]Erreur :: "+e);
+        }
         /*
         ==========================================================================================
             Supression 
@@ -68,6 +85,13 @@ public class TestTache {
         }catch(Exception e){
             System.out.println("[UPDATE]Erreur :: "+e);
         }
+        
+        try{
+            c1.delete();
+        
+        }catch(Exception e){
+            System.out.println("[RECHERCHE]Erreur :: "+e);
+        }
         /*
         ==========================================================================================
             Recherche 
@@ -75,7 +99,7 @@ public class TestTache {
         */
         try{ 
             System.out.println("[RECHERCHE]Debut de la recherche");
-            c1.read(1);
+            c1.read(3);
             System.out.println(c1.toString());
             System.out.println("[RECHERCHE]Fin de la recherche");
         }catch(Exception e){

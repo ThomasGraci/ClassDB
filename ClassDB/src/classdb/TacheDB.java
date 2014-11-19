@@ -5,8 +5,9 @@ import java.sql.*;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
 import java.util.*;
-import java.sql.Date;
 
 public class TacheDB extends Tache implements CRUD{
     protected static Connection dbConnect = null;
@@ -15,12 +16,12 @@ public class TacheDB extends Tache implements CRUD{
     }
 
     public TacheDB(String titre, String description, String etat,
-            Date date_tache, int num_ordre, int depanneur, int createur) {
-        super(0, titre, description, etat, date_tache, num_ordre, depanneur, createur);
+            String date_tache, int num_ordre, int depanneur, int createur) {
+        super(titre, description, etat, date_tache, num_ordre, depanneur, createur);
     }
 
     public TacheDB(int idtache, String titre, String description, String etat,
-            Date date_tache, int num_ordre, int depanneur, int createur) {
+            String date_tache, int num_ordre, int depanneur, int createur) {
         super(0, titre, description, etat, date_tache, num_ordre, depanneur, createur);
     }
 
@@ -39,19 +40,29 @@ public class TacheDB extends Tache implements CRUD{
     public void create() throws Exception {
         CallableStatement cstmt = null;
         try {
-            String req = "call create_tache(?,?,?,?,?,?,?,?)";
+            String req = "call create_tache(?,?,?,?,?,?,?)";
             cstmt = dbConnect.prepareCall(req);
-            cstmt.registerOutParameter(1, java.sql.Types.INTEGER);
-            cstmt.setString(2, titre);
-            cstmt.setString(3, description);
-            cstmt.setString(4, etat);
-            cstmt.setDate(5, date_tache);
-            cstmt.setInt(6, num_ordre);
-            cstmt.setInt(7, depanneur);
-            cstmt.setInt(8, createur);
+            
+            cstmt.setString(1, titre);
+            cstmt.setString(2, description);
+            cstmt.setString(3, etat);
+            cstmt.setString(4, date_tache);
+            cstmt.setInt(5, num_ordre);
+            cstmt.setInt(6, depanneur);
+            cstmt.setInt(7, createur);
             cstmt.executeUpdate();
-            this.idtache = cstmt.getInt(1);
-
+            
+            String query2="select id_tache from tâche where titre= ?" ;
+            
+            PreparedStatement pstm2 = dbConnect.prepareStatement(query2);
+            pstm2.setString(1,titre);
+            ResultSet rs= pstm2.executeQuery();
+            if(rs.next()){
+                int nc= rs.getInt(1);
+                idtache = nc;
+            }
+            else System.out.println("erreur");
+            
         } catch (SQLException e) {
 
             throw new Exception("Erreur de création " + e.getMessage());
@@ -67,8 +78,8 @@ public class TacheDB extends Tache implements CRUD{
        
         CallableStatement cstmt=null;
         try{
-            boolean trouve=false;
-             String query1="SELECT * FROM tache WHERE id_tache = ?";
+             boolean trouve=false;
+             String query1="SELECT * FROM tâche WHERE id_tache = ?";
              PreparedStatement pstm1 = dbConnect.prepareStatement(query1);
              pstm1.setInt(1,ntache);
              ResultSet rs= pstm1.executeQuery();
@@ -78,7 +89,7 @@ public class TacheDB extends Tache implements CRUD{
                  titre = rs.getString("TITRE");
                  description = rs.getString("DESCRIPTION");
                  etat = rs.getString("ETAT");
-                 date_tache = rs.getDate("DATE_TACHE");
+                 date_tache = rs.getString("DATE_TACHE");
                  num_ordre = rs.getInt("NUM_ORDRE");
                  depanneur = rs.getInt("DEPANNEUR");
                  createur = rs.getInt("CREATEUR");
@@ -99,7 +110,11 @@ public class TacheDB extends Tache implements CRUD{
 
     public void update() throws Exception {
         CallableStatement cstmt = null;
-
+        
+       
+        DateFormat df_date = new SimpleDateFormat("dd/MM/yyyy");
+        java.util.Date utilDate = df_date.parse(date_tache);
+        java.sql.Date sqlDate = new java.sql.Date(utilDate.getTime());
         try {
             String req = "call update_tache(?,?,?,?,?,?,?,?)";
             cstmt = dbConnect.prepareCall(req);
@@ -108,7 +123,7 @@ public class TacheDB extends Tache implements CRUD{
             cstmt.setString(2, titre);
             cstmt.setString(3, description);
             cstmt.setString(4, etat);
-            cstmt.setDate(5, date_tache);
+            cstmt.setDate(5, sqlDate);
             cstmt.setInt(6, num_ordre);
             cstmt.setInt(7, depanneur);
             cstmt.setInt(8, createur);
