@@ -15,7 +15,7 @@ public class UserDB extends User implements CRUD{
 
     public UserDB(String nom, String prenom, String login,
             String motdepasse, int admin) {
-        super(0, nom, prenom, login, motdepasse, admin);
+        super(0,nom, prenom, login, motdepasse, admin);
     }
 
     public UserDB(int idclient, String nom, String prenom, String login,
@@ -38,16 +38,15 @@ public class UserDB extends User implements CRUD{
     public void create() throws Exception {
         CallableStatement cstmt = null;
         try {
-            String req = "call create_user(?,?,?,?,?,?)";
+            String req = "call create_user(?,?,?,?,?)";
             cstmt = dbConnect.prepareCall(req);
-            cstmt.registerOutParameter(1, java.sql.Types.INTEGER);
-            cstmt.setString(2, nom);
-            cstmt.setString(3, prenom);
-            cstmt.setString(4, login);
-            cstmt.setString(5, motdepasse);
-            cstmt.setInt(6, admin);
+            
+            cstmt.setString(1, nom);
+            cstmt.setString(2, prenom);
+            cstmt.setString(3, login);
+            cstmt.setString(4, motdepasse);
+            cstmt.setInt(5, admin);
             cstmt.executeUpdate();
-            this.iduser = cstmt.getInt(1);
 
         } catch (SQLException e) {
 
