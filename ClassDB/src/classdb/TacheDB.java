@@ -162,4 +162,36 @@ public class TacheDB extends Tache implements CRUD{
             }
         }
     }
+    
+    public static ArrayList<TacheDB> all() throws Exception {
+        ArrayList<TacheDB> all = new ArrayList<TacheDB>();
+        CallableStatement cstmt=null;
+        try {
+            boolean trouve=false;
+            String query1="SELECT * FROM tâche";
+            PreparedStatement pstm1 = dbConnect.prepareStatement(query1);
+            ResultSet rs = pstm1.executeQuery();
+            while(rs.next()){
+                trouve=true;
+                int idtachetmp = rs.getInt("ID_TACHE");
+                String titretmp = rs.getString("TITRE");
+                String descriptiontmp = rs.getString("DESCRIPTION");
+                String etattmp = rs.getString("ETAT");
+                String datetmp = rs.getString("DATE_TACHE");
+                int ordretmp = rs.getInt("NUM_ORDRE");
+                int depanneurtmp = rs.getInt("DEPANNEUR");
+                int createurtmp = rs.getInt("CREATEUR");
+                
+                all.add(new TacheDB(idtachetmp,titretmp,descriptiontmp,etattmp,datetmp,ordretmp,depanneurtmp,createurtmp));
+            }
+            if(!trouve)throw new Exception("rien trouvé");
+            else return all;
+        }
+        catch(Exception e) {
+            throw new Exception(e.getMessage());
+        }
+    }
+        
 }
+    
+    

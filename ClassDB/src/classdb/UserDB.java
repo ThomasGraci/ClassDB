@@ -149,5 +149,34 @@ public class UserDB extends User implements CRUD{
             }
         }
     }
+    
+    public static ArrayList<UserDB> all() throws Exception {
+        ArrayList<UserDB> all = new ArrayList<UserDB>();
+        CallableStatement cstmt=null;
+        try {
+            boolean trouve=false;
+            String query1="SELECT * FROM users";
+            PreparedStatement pstm1 = dbConnect.prepareStatement(query1);
+            ResultSet rs = pstm1.executeQuery();
+            while(rs.next()){
+                trouve=true;
+                int idusertmp = rs.getInt("ID_USER");
+                String nomtmp = rs.getString("NOM");
+                String prenomtmp = rs.getString("PRENOM");
+                String logintmp = rs.getString("LOGIN");
+                String mdptmp = rs.getString("MOT_DE_PASSE");
+                int admintmp = rs.getInt("ADMIN");
+                
+                all.add(new UserDB(idusertmp,nomtmp,prenomtmp,logintmp,mdptmp,admintmp));
+            }
+            if(!trouve)throw new Exception("rien trouvé");
+            else return all;
+        }
+        catch(Exception e) {
+            throw new Exception(e.getMessage());
+        }
+        
+        
+    }
 
 }
