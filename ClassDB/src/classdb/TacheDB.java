@@ -163,14 +163,15 @@ public class TacheDB extends Tache implements CRUD{
         }
     }
     
-    public static ArrayList<TacheDB> all() throws Exception {
-        ArrayList<TacheDB> all = new ArrayList<TacheDB>();
+    public static ArrayList<TacheDB>tachesDepanneur(int iddep) throws Exception {//arraylist qui contient les tâches d'un dépanneur
+        ArrayList<TacheDB> tachesDepanneur = new ArrayList<TacheDB>();
         CallableStatement cstmt=null;
         try {
             boolean trouve=false;
-            String query1="SELECT * FROM tâche";
+            String query1="SELECT * FROM tâche WHERE depanneur = ?";
             PreparedStatement pstm1 = dbConnect.prepareStatement(query1);
-            ResultSet rs = pstm1.executeQuery();
+            pstm1.setInt(1,iddep);
+            ResultSet rs= pstm1.executeQuery();
             while(rs.next()){
                 trouve=true;
                 int idtachetmp = rs.getInt("ID_TACHE");
@@ -182,10 +183,10 @@ public class TacheDB extends Tache implements CRUD{
                 int depanneurtmp = rs.getInt("DEPANNEUR");
                 int createurtmp = rs.getInt("CREATEUR");
                 
-                all.add(new TacheDB(idtachetmp,titretmp,descriptiontmp,etattmp,datetmp,ordretmp,depanneurtmp,createurtmp));
+                tachesDepanneur.add(new TacheDB(idtachetmp,titretmp,descriptiontmp,etattmp,datetmp,ordretmp,depanneurtmp,createurtmp));
             }
             if(!trouve)throw new Exception("rien trouvé");
-            else return all;
+            else return tachesDepanneur;
         }
         catch(Exception e) {
             throw new Exception(e.getMessage());

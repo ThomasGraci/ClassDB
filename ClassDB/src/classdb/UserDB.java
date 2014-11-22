@@ -150,12 +150,12 @@ public class UserDB extends User implements CRUD{
         }
     }
     
-    public static ArrayList<UserDB> all() throws Exception {
+    public static ArrayList<UserDB> all() throws Exception {//arraylist qui retourne tous les dépanneurs (pas les administrateur)
         ArrayList<UserDB> all = new ArrayList<UserDB>();
         CallableStatement cstmt=null;
         try {
             boolean trouve=false;
-            String query1="SELECT * FROM users";
+            String query1="SELECT * FROM users WHERE createur = 0";
             PreparedStatement pstm1 = dbConnect.prepareStatement(query1);
             ResultSet rs = pstm1.executeQuery();
             while(rs.next()){
