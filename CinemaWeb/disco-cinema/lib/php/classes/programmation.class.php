@@ -2,10 +2,6 @@
 
 class programmation {
     
-    protected $_id_prog;
-    protected $_pfilm;
-    protected $_psalle;
-    protected $_pseance;
     private $_attributs = array();
         
     public function __construct($data) {
