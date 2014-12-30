@@ -21,13 +21,11 @@ if ($_POST) {
     if ($erreur == 0) {
         //vérifier dans la db si infos de connexion sont valides        
         $progtoverify = new ProgrammationDB($db);
-        $retour = $progtoverify->verifProg($_POST["inputTitre"], $_POST["inputSalle"], $_POST["inputSalle"],$_SESSION["id_client"]);
-        echo $retour;
-        if ($retour != 1) {
-            echo '<div class="alert alert-danger" role="alert">Impossible de trouver la programmation souhaitée dans la base de donnée</div>';            
+        if ($progtoverify->verifProg($_POST["inputTitre"], $_POST["inputSalle"], $_POST["inputSeance"],$_SESSION["id_client"])) {
+            echo '<div class="alert alert-success" role="alert">Achat effectué</div>';            
                         
         } else {
-           echo '<div class="alert alert-success" role="alert">Achat effectué</div>'; 
+           echo '<div class="alert alert-danger" role="alert">Impossible de trouver la programmation souhaitée dans la base de donnée</div>'; 
         }
     }
 }

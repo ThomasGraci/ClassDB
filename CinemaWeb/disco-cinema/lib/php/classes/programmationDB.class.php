@@ -10,9 +10,10 @@ class ProgrammationDB extends programmation {
     }
 
     public function getArrayProg() {
-
+        $dataOut = array();
+        $i = 0;
         try {
-            $query = "select pfilm, psalle, pseance from programmation order by pfilm;";
+            $query = "select p.pfilm, p.psalle, p.pseance, f.duree, f.description, f.affiche from programmation p, film f where p.pfilm = f.titre order by p.pfilm;";
             $resultset = $this->_db->prepare($query);
             $resultset->execute();
         } catch (Exception $ex) {
@@ -20,32 +21,29 @@ class ProgrammationDB extends programmation {
         }
 
         while ($data = $resultset->fetch()) {
-            try {
-                $_progArray[] = new ProgrammationDB($data);
-            } catch (PDOException $e) {
-
-                print $e->getMessage();
-            }
+            $dataOut[$i]["pfilm"] = $data["pfilm"];
+            $dataOut[$i]["psalle"] = $data["psalle"];
+            $dataOut[$i]["pseance"] = $data["pseance"];
+            $dataOut[$i]["duree"] = $data["duree"];
+            $dataOut[$i]["description"] = $data["description"];
+            $dataOut[$i]["affiche"] = $data["affiche"];
+            $i++;
         }
-        return $_progArray;
+        return $dataOut;
     }
 
     public function verifProg($pfilm, $psalle, $pseance, $client) {
-        $erreurRetour = "";
-        $query = "select verifProgrammation(:pfilm,:psalle,:pseance,:client) as retour";
         try {
-            $id = null;
-            $statement = $this->_db->prepare($query);
-            $statement->bindValue(1, $pfilm, PDO::PARAM_STR);
-            $statement->bindValue(2, $psalle, PDO::PARAM_INT);
-            $statement->bindValue(3, $pseance, PDO::PARAM_STR);
-            $statement->bindValue(4, $client, PDO::PARAM_INT);
-            $statement->execute();
-            $retour = $statement->fetchColumn(0);
-            return $retour;
-        } catch (PDOException $e) {
-            $retour = 0;
-            return $retour;
+            $query = "insert into achat(id_ticket, id_client, date_achat)"
+                    . "select t.id_ticket, c.id_client, current_date from programmation p, ticket t, client c"
+                    . "where (p.pfilm = '" . $pfilm . "' and p.psalle = " . $psalle . " and p.pseance = '" . $pseance . "' and c.id_client = " . $client . ")"
+                    . "and (p.id_prog = t.id_prog);";
+            $resultset = $this->_db->prepare($query);
+            $resultset->execute();
+            $retour = $resultset->fetchColumn(0);
+            print_r($retour);
+        } catch (Exception $ex) {
+            echo $ex->getMessage();
         }
     }
 

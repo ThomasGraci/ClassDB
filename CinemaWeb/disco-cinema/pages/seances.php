@@ -2,7 +2,6 @@
 $mg = new ProgrammationDB($db);
 $liste_prog = $mg->getArrayProg();
 $nbr = count($liste_prog);
-print_r($liste_prog);
 ?>
 
 <h2 id="titre_page" class="page-header">A l'affiche cette semaine:</h2>
@@ -13,19 +12,30 @@ print_r($liste_prog);
         ?>
 
         <div class="panel panel-default">
-            <div class="panel-heading" role="tab" id="headingOne">
+            <div class="panel-heading" role="tab" id="heading<?php echo $i; ?>">
                 <h4 class="panel-title">
-                    <a data-toggle="collapse" data-parent="#accordion" href="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
-                        <?php print $liste_prog[$i]->pfilm; ?> Salle: <?php print $liste_prog[$i]->psalle; ?> S&eacute;ance: <?php print $liste_prog[$i]->pseance ?>
+                    <a data-toggle="collapse" data-parent="#accordion" href="#collapse<?php echo $i; ?>" aria-expanded="true" aria-controls="collapse<?php echo $i; ?>">
+                        <?php echo $liste_prog[$i]["pfilm"]; ?>
                     </a>
                 </h4>
             </div>
-            <div id="collapseOne" class="panel-collapse collapse in" role="tabpanel" aria-labelledby="headingOne">
+            <div id="collapse<?php echo $i; ?>" class="panel-collapse collapse <?php if ($i == 0) echo 'in'; ?>" role="tabpanel" aria-labelledby="heading<?php echo $i; ?>">
                 <div class="panel-body">
                     <table style="width:100%;">
                         <tr>
-                            <td style="width:20%">Ton image</td>
-                            <td style="width:80%">Ton text</td>
+                            <td style="width: 33%;"><b>Salle : <?php echo $liste_prog[$i]["psalle"]; ?></b></td>
+                            <td style="width: 33%;"><b>Séance : <?php echo $liste_prog[$i]["pseance"]; ?></b></td>
+                            <td style="width: 33%;"><b>Durée : <?php echo $liste_prog[$i]["duree"]; ?> min</b></td>
+                        </tr>
+                        <tr>
+                            <td colspan="3">
+                                <table>
+                                    <tr>
+                                        <td style="width:20%"><?php echo '<img src="../admin/images/' . $liste_prog[$i]["affiche"] . '" style="width:100px;" />'; ?></td>
+                                        <td style="width:80%"><?php echo $liste_prog[$i]["description"]; ?></td>
+                                    </tr>
+                                </table>
+                            </td>
                         </tr>
                     </table>
                 </div>
