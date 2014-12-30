@@ -11,12 +11,12 @@ print_r($liste_prog);
     <?php
     for ($i = 0; $i < $nbr; $i++) {
         ?>
-    
+
         <div class="panel panel-default">
             <div class="panel-heading" role="tab" id="headingOne">
                 <h4 class="panel-title">
                     <a data-toggle="collapse" data-parent="#accordion" href="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
-                        <?php print $liste_prog[$i]->pfilm;?> Salle: <?php print $liste_prog[$i]->psalle;?> S&eacute;ance: <?php print $liste_prog[$i]->pseance?>
+                        <?php print $liste_prog[$i]->pfilm; ?> Salle: <?php print $liste_prog[$i]->psalle; ?> S&eacute;ance: <?php print $liste_prog[$i]->pseance ?>
                     </a>
                 </h4>
             </div>
