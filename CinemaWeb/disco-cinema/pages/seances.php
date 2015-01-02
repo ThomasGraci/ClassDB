@@ -15,7 +15,7 @@ $nbr = count($liste_prog);
             <div class="panel-heading" role="tab" id="heading<?php echo $i; ?>">
                 <h4 class="panel-title">
                     <a data-toggle="collapse" data-parent="#accordion" href="#collapse<?php echo $i; ?>" aria-expanded="true" aria-controls="collapse<?php echo $i; ?>">
-                        <?php echo $liste_prog[$i]["pfilm"]; ?>
+                        <?php echo $liste_prog[$i]["titre"]; ?>
                     </a>
                 </h4>
             </div>
@@ -23,8 +23,8 @@ $nbr = count($liste_prog);
                 <div class="panel-body">
                     <table style="width:100%;">
                         <tr>
-                            <td style="width: 33%;"><b>Salle : <?php echo $liste_prog[$i]["psalle"]; ?></b></td>
-                            <td style="width: 33%;"><b>Séance : <?php echo $liste_prog[$i]["pseance"]; ?></b></td>
+                            <td style="width: 33%;"><b>Salle : <?php echo $liste_prog[$i]["numero"]; ?></b></td>
+                            <td style="width: 33%;"><b>Séance : <?php echo $liste_prog[$i]["h_debut"]; ?></b></td>
                             <td style="width: 33%;"><b>Durée : <?php echo $liste_prog[$i]["duree"]; ?> min</b></td>
                         </tr>
                         <tr>
