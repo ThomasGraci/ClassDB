@@ -36,8 +36,8 @@ class ProgrammationDB extends programmation {
     public function verifProg($pfilm, $psalle, $pseance, $client) {
         try {
             $query = "insert into achat(id_ticket, id_client, date_achat)"
-                    . "select t.id_ticket, c.id_client, current_date from programmation2 p, ticket t, client c, film f, salle sa, seance se"
-                    . "where (p.pfilm = '" . $pfilm . "' and p.psalle = " . $psalle . " and p.pseance = '" . $pseance . "' and c.id_client = " . $client . ")"
+                    . "select t.id_ticket, c.id_client, current_date from programmation2 p, ticket t, client c, film f, salle sa, seance se "
+                    . "where (f.titre = '" . $pfilm . "' and sa.numero = " . $psalle . " and se.h_debut = '" . $pseance . "' and c.id_client = " . $client . ")"
                     . "and (p.id_prog = t.id_prog and p.pfilm = f.id_film and p.psalle = sa.id_salle and p.pseance = se.id_seance);";
             $resultset = $this->_db->prepare($query);
             $resultset->execute();
