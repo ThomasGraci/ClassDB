@@ -1,6 +1,6 @@
 <?php
 session_start();
-header('Content-Type: application/json');
+//header('Content-Type: application/json');
 //indique que le retour doit $etre traité en json
 require './liste_include_ajax.php';
 require '../classes/connexion.class.php';

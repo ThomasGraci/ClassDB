@@ -19,7 +19,7 @@ $(document).ready(function () {
                 type: 'GET', 
                 data: data_form, // si sérialisé
                 //data: "login=" + login + "&password=" + password, // si pas sérialisé
-                dataType: "json",
+                //dataType: "json",
                 url: './lib/php/ajax/AjaxLogin.php',
                 success: function (data) {
                     if (data.retour === 1) {
