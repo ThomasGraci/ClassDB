@@ -42,8 +42,8 @@ class ProgrammationDB extends programmation {
                     . "and (p.id_prog = t.id_prog and p.pfilm = f.id_film and p.psalle = sa.id_salle and p.pseance = se.id_seance);";
             $resultset = $this->_db->prepare($query);
             $resultset->execute();
-            $retour = $resultset->fetchColumn(0);
-            echo ($retour);
+            $resultset->fetchColumn(0);
+            
         } catch (Exception $ex) {
             $erreurRetour = $ex->getMessage();
         }
