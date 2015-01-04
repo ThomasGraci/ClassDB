@@ -1,6 +1,6 @@
 <?php
 session_start();
 session_destroy();
-header('Location: http://localhost/CinemaWeb/disco-cinema/');
+header('Location: http://127.0.0.1/projects/Websites/CinemaWeb/disco-cinema/');
 
 ?>

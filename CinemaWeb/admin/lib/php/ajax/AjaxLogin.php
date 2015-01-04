@@ -16,7 +16,7 @@ try{
         $_SESSION['page']="accueil";
                //print "session : ".$_SESSION['admin'];
     }
-    print json_encode(array('retour' => $retour)); 
+    //print json_encode(array('retour' => $retour)); 
 }
 catch(PDOException $e){}
 

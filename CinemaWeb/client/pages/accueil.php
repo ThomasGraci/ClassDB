@@ -10,12 +10,6 @@
         <?php print $texte[0]->texte_accueil;          
         ?>
     </div>
-
-<section id="avertisst" class=" txtRed">    
-    <br />Attention : Pour réserver sur notre site vous devez d'abord vous inscrire et/ou vous connectez!   
-</section>
- <!--<input type="button" class="btn btn-default" id="cacher" value="Conditions générales"/>-->
- <button type="button" class="btn btn-warning" id="cacher">Conditions générales</button>
  
  <section id="no-js" class="txtRed txtGras">
      Pour plus de confort d'utilisation, veuillez activer javascript!

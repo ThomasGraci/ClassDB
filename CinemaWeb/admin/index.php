@@ -15,10 +15,14 @@ $i = 0;
         <link rel="stylesheet" type="text/css" href="./lib/css/style_pc.css"/>
         <link rel="stylesheet" type="text/css" href="./lib/css/style_jquery.css"/>
         <link rel="stylesheet" type="text/css" href="./lib/css/mediaqueries.css"/>
+        <!-- Latest compiled and minified CSS -->
+        <!-- <link rel="stylesheet" href="../Bootstrap/css/bootstrap.min.css">
+        <!-- Optional theme -->
+        <!-- <link rel="stylesheet" href="../Bootstrap/css/bootstrap-theme.min.css">-->
 
-
-        <script src="../jquery/jquery-1.11.js"></script>
+        <script src="../jquery/jquery-1.11.js"></script>        
         <script type="text/javascript" src="./lib/js/fonctionsJqueryAdmin.js"></script> 
+        
         
     </head>
 
