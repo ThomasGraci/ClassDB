@@ -16,9 +16,9 @@ if ($_POST) {
         $clientToRegister->logon($_POST["inputName"], $_POST["inputTel2"]);
         
         if ($clientToRegister->get_id_client() != -1) {
-            echo '<div class="alert alert-success" role="alert">Bonjour '.$clientToRegister->get_nom().', vous êtes maintenant online</div>';
+            echo '<div class="alert alert-success" role="alert">Bonjour '.$clientToRegister->get_prenom().', vous êtes maintenant connecté</div>';
             $_SESSION["id_client"] = $clientToRegister->get_id_client();
-            echo '<META HTTP-EQUIV="Refresh" CONTENT="3; URL=http://127.0.0.1/projects/Websites/CinemaWeb/client/index.php">';
+            echo '<META HTTP-EQUIV="Refresh" CONTENT="2; URL=http://127.0.0.1/projects/Websites/CinemaWeb/client/index.php">';
         } else {
             echo '<div class="alert alert-danger" role="alert">Connexion refusée</div>';
         }

@@ -4,7 +4,7 @@ include ('./lib/php/Cliste_include.php');
 $db = Connexion::getInstance($dsn, $user, $pass);
 session_start();
 
-$scripts = array(); //stocker tous les fichiers d'inlinemod pour les lier plus loin
+$scripts = array();
 $i = 0;
 ?>
 

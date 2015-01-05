@@ -1,14 +1,14 @@
 <!doctype html>
 <?php
 session_start();
-if(!isset($_SESSION["id_client"])){
+if (!isset($_SESSION["id_client"])) {
     header("Location: http://127.0.0.1/projects/Websites/CinemaWeb/disco-cinema/index.php?page=connexion");
     exit();
 }
 include ('./lib/php/Cliste_include.php');
 $db = Connexion::getInstance($dsn, $user, $pass);
 
-$scripts = array(); //stocker tous les fichiers d'inlinemod pour les lier plus loin
+$scripts = array(); 
 $i = 0;
 ?>
 
@@ -54,7 +54,7 @@ $i = 0;
                 <div id="main">
                     <?php
                     if (!isset($_SESSION['page'])) {
-                        $_SESSION['page'] = "accueil";
+                        $_SESSION['page'] = "profil";
                     }
                     if (isset($_GET['page'])) {
                         $_SESSION['page'] = $_GET['page'];

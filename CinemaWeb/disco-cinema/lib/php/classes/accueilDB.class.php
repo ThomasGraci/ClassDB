@@ -9,7 +9,6 @@ class AccueilDB extends Accueil {
         $this->_db = $db;
     }
 
-    //catalogue des fleurs
     public function getTexteAccueil() {
         try {
             $query = "SELECT texte_accueil FROM cinema";
